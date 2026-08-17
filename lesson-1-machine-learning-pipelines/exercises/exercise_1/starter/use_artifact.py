@@ -11,15 +11,16 @@ logger = logging.getLogger()
 
 def go(args):
     logger.info("Creating run in project exercise_1")
-    
-    # YOUR CODE HERE: Create a W&B run in project "exercise_1" with job_type="use_file"
-    
+  
+    run = wandb.init(project="exercise_1", job_type="use_file")
+
     logger.info("Getting artifact")
+  
+    artifact = run.use_artifact(args.artifact_name)
+    artifact_path = artifact.file()
     
-    # YOUR CODE HERE: Use run.use_artifact to get the artifact specified in args.artifact_name
-    
-    # YOUR CODE HERE: Get the file path from the artifact using the .file() method
-    
+    run.finish()
+
     logger.info("Artifact content:")
     with open(artifact_path, "r") as fp:
         content = fp.read()
@@ -38,3 +39,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     go(args)
+
+# run the code
+# python use_artifact.py --artifact_name exercise_1/zen_of_python:v1
+# python use_artifact.py --artifact_name exercise_1/zen_of_python:v0

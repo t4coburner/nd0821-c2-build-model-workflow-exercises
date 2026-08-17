@@ -15,7 +15,8 @@ def go(args):
 
     # Create a W&B run in the project `exercise_1`. Set the option `job_type="upload_file"`:
 
-    # YOUR CODE HERE
+    with wandb.init(project="exercise_1", job_type="upload_file") as run:
+    
 
     # Create an instance of the class `wandb.Artifact`. Use the `artifact_name` parameter to
     # fill the keyword `name` when constructing the `wandb.Artifact` class. Use the parameters
@@ -23,12 +24,17 @@ def go(args):
     # `description`.
     # HINT: you can use args.artifact_name to reference the parameter artifact_name
 
-    # YOUR CODE HERE
+        artifact = wandb.Artifact(
+            name=args.artifact_name,
+            type=args.artifact_type,
+            description=args.artifact_description
+        )
 
     # Attach the file provided as the parameter `input_file` to the artifact instance using
     # `artifact.add_file`, and log the artifact to the run using `run.log_artifact`.
 
-    # YOUR CODE HERE
+        artifact.add_file(args.input_file)
+        run.log_artifact(artifact)
 
 
 if __name__ == "__main__":
@@ -58,3 +64,53 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     go(args)
+
+# run the code using
+# python upload_artifact.py --input_file zen.txt --artifact_name zen_of_python --artifact_type text_file --artifact_description "20 aphorisms about writing good python code"
+
+
+"""
+(mledp2) t4corun@T4CORUN-ALLYX:~/repo/nd0821-c2-build-model-workflow-exercises/lesson-1-machine-learning-pipelines/exercises/exercise_1/starter$ python upload_artifact.py --input_file zen.txt --artifact_name zen_of_python --artifact_type text_file --artifact_description "20 aphorisms about writing good python code"
+2026-08-16 17:37:42,324 Creating run exercise_1
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/t4corun/.netrc.
+wandb: Currently logged in as: t4corun (t4corun-mledp) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.28.1
+wandb: Run data is saved locally in /home/t4corun/repo/nd0821-c2-build-model-workflow-exercises/lesson-1-machine-learning-pipelines/exercises/exercise_1/starter/wandb/run-20260816_173742-d1g1yep9
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run polished-hill-2
+wandb: ⭐️ View project at https://wandb.ai/t4corun-mledp/exercise_1
+wandb: 🚀 View run at https://wandb.ai/t4corun-mledp/exercise_1/runs/d1g1yep9
+wandb: 🚀 View run polished-hill-2 at: https://wandb.ai/t4corun-mledp/exercise_1/runs/d1g1yep9
+wandb: ⭐️ View project at: https://wandb.ai/t4corun-mledp/exercise_1
+wandb: Synced 4 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260816_173742-d1g1yep9/logs
+(mledp2) t4corun@T4CORUN-ALLYX:~/repo/nd0821-c2-build-model-workflow-exercises/lesson-1-machine-learning-pipelines/exercises/exercise_1/starter$ python upload_artifact.py --input_file zen.txt --artifact_name zen_of_python --artifact_type text_file --artifact_description "20 aphorisms about writing good python code"
+2026-08-16 17:38:29,047 Creating run exercise_1
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/t4corun/.netrc.
+wandb: Currently logged in as: t4corun (t4corun-mledp) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.28.1
+wandb: Run data is saved locally in /home/t4corun/repo/nd0821-c2-build-model-workflow-exercises/lesson-1-machine-learning-pipelines/exercises/exercise_1/starter/wandb/run-20260816_173829-2buify15
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run radiant-waterfall-3
+wandb: ⭐️ View project at https://wandb.ai/t4corun-mledp/exercise_1
+wandb: 🚀 View run at https://wandb.ai/t4corun-mledp/exercise_1/runs/2buify15
+wandb: 🚀 View run radiant-waterfall-3 at: https://wandb.ai/t4corun-mledp/exercise_1/runs/2buify15
+wandb: ⭐️ View project at: https://wandb.ai/t4corun-mledp/exercise_1
+wandb: Synced 4 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260816_173829-2buify15/logs
+(mledp2) t4corun@T4CORUN-ALLYX:~/repo/nd0821-c2-build-model-workflow-exercises/lesson-1-machine-learning-pipelines/exercises/exercise_1/starter$ python upload_artifact.py --input_file zen.txt --artifact_name zen_of_python --artifact_type text_file --artifact_description "20 aphorisms about writing good python code"
+2026-08-16 17:38:51,020 Creating run exercise_1
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/t4corun/.netrc.
+wandb: Currently logged in as: t4corun (t4corun-mledp) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.28.1
+wandb: Run data is saved locally in /home/t4corun/repo/nd0821-c2-build-model-workflow-exercises/lesson-1-machine-learning-pipelines/exercises/exercise_1/starter/wandb/run-20260816_173851-iizjh4su
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run denim-hill-4
+wandb: ⭐️ View project at https://wandb.ai/t4corun-mledp/exercise_1
+wandb: 🚀 View run at https://wandb.ai/t4corun-mledp/exercise_1/runs/iizjh4su
+wandb: WARNING Artifact "zen_of_python" already exists with the same content. No new version will be created.
+wandb: 🚀 View run denim-hill-4 at: https://wandb.ai/t4corun-mledp/exercise_1/runs/iizjh4su
+wandb: ⭐️ View project at: https://wandb.ai/t4corun-mledp/exercise_1
+wandb: Synced 4 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260816_173851-iizjh4su/logs
+"""
