@@ -3,7 +3,7 @@ import scipy.stats
 
 # COMPLETE HERE: make this test accept the fixtures defined in the
 # conftest.py file (data and ks_alpha)
-def test_kolmogorov_smirnov(x, y):  # TODO: update x and y here.
+def test_kolmogorov_smirnov(data, ks_alpha):  # TODO: update x and y here.
 
     sample1, sample2 = data
 
@@ -24,10 +24,17 @@ def test_kolmogorov_smirnov(x, y):  # TODO: update x and y here.
 
     for col in columns:
 
-        ts, p_value = scipy.stats.ks_2samp(sample1[col], sample2[col])
+        ts, p_value = scipy.stats.ks_2samp(sample1[col], sample2[col], alternative='two-sided')
 
         # NOTE: as always, the p-value should be interpreted as the probability of
         # obtaining a test statistic (TS) equal or more extreme that the one we got
         # by chance, when the null hypothesis is true. If this probability is not
         # large enough, this dataset should be looked at carefully, hence we fail
         assert p_value > alpha_prime
+
+"""
+mlflow run . \
+    -P reference_artifact="exercise_6/data_train.csv:latest" \
+    -P sample_artifact="exercise_6/data_test.csv:latest" \
+    -P ks_alpha=0.05
+"""
